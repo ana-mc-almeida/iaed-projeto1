@@ -19,7 +19,7 @@ int check_duplicate_airport(char s[])
     int flag = 1, i;
     for (i = 0; i < numAirports; i++)
     {
-        if (strcmp(airports[i].id, s))
+        if (strcmp(airports[i].id, s) == 0)
         {
             flag = 0;
             break;
@@ -33,13 +33,22 @@ void add_airport()
     char id[LEN_ID_AIRPORT];
     Airport airport;
 
-    get_IDAeroport(id);
+    get_IDAirport(id);
     if (!check_invalid_airportID(id))
-        printf("invalid airports ID\n");
-    else if (numAirports + 1 >= MAXAIRPORTS)
+    {
+        printf("invalid airport ID\n");
+        finish_line();
+    }
+    else if (numAirports >= MAXAIRPORTS)
+    {
         printf("too many airports\n");
+        finish_line();
+    }
     else if (!check_duplicate_airport(id))
+    {
         printf("duplicate airport\n");
+        finish_line();
+    }
     else
     {
         strcpy(airport.id, id);

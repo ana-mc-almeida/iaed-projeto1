@@ -1,4 +1,5 @@
-#include "headers.c"
+/* #include "headers.c" */
+#include "global_helps.c"
 
 void remove_spaces()
 {
@@ -16,6 +17,12 @@ Date get_data()
     Date date;
     scanf("%d-%d-%d", &date.day, &date.month, &date.year);
     return date;
+}
+
+void finish_line()
+{
+    while (current_char != '\n')
+        current_char = getchar();
 }
 
 void get_IDAirport(char s[])
