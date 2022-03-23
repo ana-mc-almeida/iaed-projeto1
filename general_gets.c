@@ -1,5 +1,16 @@
 #include "headers.c"
 
+void remove_spaces()
+{
+    current_char = getchar();
+    while (isspace(current_char))
+    {
+        current_char = getchar();
+    }
+
+    /* printf("CURRENTE CHAR %c\n", current_char); */
+}
+
 Date get_data()
 {
     Date date;
@@ -7,10 +18,12 @@ Date get_data()
     return date;
 }
 
-void get_IDAeroport(char s[])
+void get_IDAirport(char s[])
 {
     int i = 0;
-    current_char = getchar();
+
+    remove_spaces();
+
     while (!isspace(current_char) && current_char != '\n')
     {
         s[i] = current_char;
@@ -18,28 +31,37 @@ void get_IDAeroport(char s[])
         current_char = getchar();
     }
     s[i] = '\0';
+    /* printf("ID %s\n", s); */
 }
 
 void get_pais(char s[])
 {
-    char current_char;
     int i = 0;
-    while (!isspace(current_char = getchar()))
+
+    remove_spaces();
+
+    while (!isspace(current_char))
     {
         s[i] = current_char;
         i++;
+        current_char = getchar();
     }
     s[i] = '\0';
+    /* printf("PAIS %s\n", s); */
 }
 
 void get_city(char s[])
 {
-    char current_char;
     int i = 0;
-    while ((current_char = getchar()) != '\n')
+
+    remove_spaces();
+
+    while (current_char != '\n')
     {
         s[i] = current_char;
         i++;
+        current_char = getchar();
     }
     s[i] = '\0';
+    /* printf("CIDADE %s\n", s); */
 }
