@@ -1,4 +1,13 @@
-#include "global_defines.c"
+/*
+ * File:
+ * Author:
+ * Description:
+ */
+
+#ifndef STRUCTS
+#define STRUCTS
+
+#include "headers.c"
 
 typedef struct
 {
@@ -30,3 +39,5 @@ typedef struct
     Time duration;
     int max_passengers;
 } Flight;
+
+#endif

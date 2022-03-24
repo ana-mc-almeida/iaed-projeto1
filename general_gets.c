@@ -1,5 +1,13 @@
-/* #include "headers.c" */
-#include "global_helps.c"
+/*
+ * File:
+ * Author:
+ * Description:
+ */
+
+#ifndef GENERAL_FUNCTIONS
+#define GENERAL_FUNCTIONS
+
+#include "headers.c"
 
 void remove_spaces()
 {
@@ -10,13 +18,6 @@ void remove_spaces()
     }
 
     /* printf("CURRENTE CHAR %c\n", current_char); */
-}
-
-Date get_data()
-{
-    Date date;
-    scanf("%d-%d-%d", &date.day, &date.month, &date.year);
-    return date;
 }
 
 void finish_line()
@@ -72,3 +73,17 @@ void get_city(char s[])
     s[i] = '\0';
     /* printf("CIDADE %s\n", s); */
 }
+
+/* imprimir horas no formato HH:MM */
+void print_time(Time time)
+{
+    printf("%02d:%02d", time.hour, time.minute);
+}
+
+/* imprimir data no formato DD-MM-AAAA */
+void print_date(Date date)
+{
+    printf("%02d-%02d-%d", date.day, date.month, date.year);
+}
+
+#endif

@@ -1,4 +1,9 @@
-#include "general_gets.c"
+/*
+ * File:
+ * Author:
+ * Description: all functions needed to add airport
+ */
+#include "headers.c"
 
 int check_invalid_airportID(char s[])
 {

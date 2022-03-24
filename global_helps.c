@@ -1,3 +1,11 @@
+/*
+ * File:
+ * Author:
+ * Description: funcoes auxiliares do projeto
+ */
+#ifndef HELPS
+#define HELPS
+
 #include "headers.c"
 
 void print_airports()
@@ -12,3 +20,5 @@ void print_airports()
     }
     printf("\n**************************\n");
 }
+
+#endif
