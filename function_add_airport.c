@@ -38,7 +38,7 @@ void add_airport()
     char id[LEN_ID_AIRPORT];
     Airport airport;
 
-    get_IDAirport(id);
+    get_word(id);
     if (!check_invalid_airportID(id))
     {
         printf("invalid airport ID\n");
@@ -57,7 +57,7 @@ void add_airport()
     else
     {
         strcpy(airport.id, id);
-        get_pais(airport.country);
+        get_word(airport.country);
         get_city(airport.city);
         airports[numAirports] = airport;
         numAirports++;

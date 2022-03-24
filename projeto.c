@@ -23,6 +23,9 @@ int main()
         current_char = getchar();
         /*printf("-- CURRENT CHAR %c\n", current_char);*/
 
+        /* absorver o espaco que vem sempre a seguir */
+        /* getchar(); */
+
         switch (current_char)
         {
         /* termina o programa */
@@ -32,8 +35,6 @@ int main()
 
         /* adiciona um novo aeroporto ao sistema */
         case 'a':
-            /* absorver o espaco que vem sempre a seguir */
-            /* getchar(); */
             add_airport();
             break;
 

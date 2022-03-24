@@ -26,6 +26,22 @@ void finish_line()
         current_char = getchar();
 }
 
+void get_word(char s[])
+{
+    int i = 0;
+
+    remove_spaces();
+
+    while (!isspace(current_char) && current_char != '\n')
+    {
+        s[i] = current_char;
+        i++;
+        current_char = getchar();
+    }
+    s[i] = '\0';
+    /* printf("ID %s\n", s); */
+}
+
 void get_IDAirport(char s[])
 {
     int i = 0;

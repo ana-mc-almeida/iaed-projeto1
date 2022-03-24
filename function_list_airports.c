@@ -76,7 +76,7 @@ void list_airports()
     /* printf("CURRENT CHAR - %c", current_char); */
     if (current_char != '\n') /* significa que tem pelo menos um id */
     {
-        get_IDAirport(id);
+        get_word(id);
         while (flag)
         {
             if (current_char == '\n')
@@ -89,7 +89,7 @@ void list_airports()
                 print_airport(i, id);
             }
             if (flag)
-                get_IDAirport(id);
+                get_word(id);
         }
     }
     else
