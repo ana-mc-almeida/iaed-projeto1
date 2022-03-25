@@ -10,8 +10,9 @@ void increase_date()
 {
     Date new_date;
 
-    remove_spaces();
-    new_date = get_data();
+    new_date = get_date();
+
+    /*print_date(new_date);*/
 
     if (!check_invalid_date(new_date))
         printf("invalid date\n");
@@ -19,5 +20,6 @@ void increase_date()
     {
         current_date = new_date;
         print_date(current_date);
+        putchar('\n');
     }
 }

@@ -38,12 +38,9 @@ void list_flights()
 int get_passengers()
 {
     char passengers_string[MAX_INT];
-    int i = 0, passengers = 0;
+    int passengers;
     get_word(passengers_string);
-    for (i = 0; passengers_string[i] != '\0'; i++)
-    {
-        passengers = passengers * 10 + passengers_string[i] - '0';
-    }
+    passengers = atoi(passengers_string);
     return passengers;
 }
 
@@ -51,7 +48,7 @@ int check_invalid_flightID(char s[])
 {
     int flag = 1, i;
 
-    for (i = 0; i < LETRAS_ID / 2; i++)
+    for (i = 0; i < LETRAS_ID; i++)
     {
         if (islower(s[i]))
         {
@@ -72,12 +69,21 @@ int check_invalid_flightID(char s[])
     return flag;
 }
 
-int check_duplicate_flight(char s[])
+int same_dates(Date d1, Date d2)
+{
+    int flag = 0;
+    if (d1.day == d2.day && d1.month == d2.month && d1.year == d2.year)
+        flag = 1;
+    return flag;
+}
+
+int check_duplicate_flight(Flight flight)
 {
     int flag = 1, i;
     for (i = 0; i < numFlights; i++)
     {
-        if (strcmp(flights[i].id, s) == 0)
+        if (strcmp(flights[i].id, flight.id) == 0 &&
+            same_dates(flights[i].date_departure, flight.date_departure))
         {
             flag = 0;
             break;
@@ -101,11 +107,11 @@ int check_flight(Flight flight)
 
     if (!check_invalid_flightID(flight.id))
     {
-        printf("invalid flight\n");
+        printf("invalid flight code\n");
         finish_line();
         flag = 0;
     }
-    else if (!check_duplicate_flight(flight.id))
+    else if (!check_duplicate_flight(flight))
     {
         printf("flight already exists\n");
         finish_line();
@@ -114,6 +120,12 @@ int check_flight(Flight flight)
     else if (check_duplicate_airport(flight.airport_departure))
     {
         printf("%s: no such airport ID\n", flight.airport_departure);
+        finish_line();
+        flag = 0;
+    }
+    else if (check_duplicate_airport(flight.airport_arrival))
+    {
+        printf("%s: no such airport ID\n", flight.airport_arrival);
         finish_line();
         flag = 0;
     }
@@ -159,7 +171,7 @@ void add_list_flights()
         get_word(new_flight.id);
         get_word(new_flight.airport_departure);
         get_word(new_flight.airport_arrival);
-        new_flight.date_departure = get_data();
+        new_flight.date_departure = get_date();
         new_flight.time_departure = get_time();
         new_flight.duration = get_time();
         new_flight.max_passengers = get_passengers();

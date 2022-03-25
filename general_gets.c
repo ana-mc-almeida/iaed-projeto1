@@ -102,10 +102,35 @@ void print_date(Date date)
     printf("%02d-%02d-%d", date.day, date.month, date.year);
 }
 
-Date get_data()
+int get_numDigits(int num)
+{
+    int digits = 0;
+    while (num != 0)
+    {
+        num /= 10;
+        digits++;
+    }
+    return digits;
+}
+
+int potency(int base, int exponent)
+{
+    int result = 1, i;
+    for (i = 1; i < exponent; i++)
+    {
+        result *= base;
+    }
+    return result;
+}
+
+Date get_date()
 {
     Date date;
     scanf("%d-%d-%d", &date.day, &date.month, &date.year);
+
+    if (isdigit(current_char))
+        date.day += (current_char - '0') * 10;
+
     return date;
 }
 
@@ -127,5 +152,41 @@ int check_invalid_date(Date new_date)
 
     return flag;
 }
+
+/*
+int string_to_int(char s[])
+{
+    int i, n = 0;
+    printf("%s\n", s);
+    for (i = 0; s[i] != '\0'; i++)
+    {
+        n = n * 10 + s[i] - '0';
+    }
+    printf("%d\n", n);
+    return n;
+}
+*/
+/*
+Date get_date()
+{
+    Date date;
+    char day[3], month[3], year[5];
+    remove_spaces();
+
+    scanf("%c%c-%c%c-%c%c%c%c",
+          &day[0], &day[1],
+          &month[0], &month[1],
+          &year[0], &year[1], &year[2], &year[3]);
+    day[2] = '\0';
+    month[2] = '\0';
+    year[4] = '\0';
+
+    date.day = string_to_int(day);
+    date.month = string_to_int(month);
+    date.year = string_to_int(year);
+
+    return date;
+}
+*/
 
 #endif
