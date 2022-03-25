@@ -32,8 +32,8 @@ typedef struct
 typedef struct
 {
     char id[LEN_ID_FLIGHT];
-    Airport airport_departure;
-    Airport airport_arrival;
+    char airport_departure[LEN_ID_AIRPORT];
+    char airport_arrival[LEN_ID_AIRPORT];
     Date date_departure;
     Time time_departure;
     Time duration;

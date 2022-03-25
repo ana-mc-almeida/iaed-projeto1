@@ -44,7 +44,7 @@ void add_airport()
         printf("invalid airport ID\n");
         finish_line();
     }
-    else if (numAirports >= MAXAIRPORTS)
+    else if (numAirports == MAXAIRPORTS)
     {
         printf("too many airports\n");
         finish_line();

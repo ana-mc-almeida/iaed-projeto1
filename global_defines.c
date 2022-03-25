@@ -19,9 +19,15 @@
 #define LEN_ID_AIRPORT 4
 
 #define LEN_ID_FLIGHT 7
+#define LETRAS_ID 2
 
 #define DIA_INICIAL 1
 #define MES_INICIAL 1
 #define ANO_INICIAL 2022
+
+#define MAX_INT 11
+
+#define MAX_PASSAGERS 100
+#define MIN_PASSAGERS 10
 
 #endif

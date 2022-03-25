@@ -21,7 +21,7 @@ int main()
     {
         /* obter carater indicativo da operacao */
         current_char = getchar();
-        /*printf("-- CURRENT CHAR %c\n", current_char);*/
+        /* printf("-- CURRENT CHAR %c\n", current_char);*/
 
         /* absorver o espaco que vem sempre a seguir */
         /* getchar(); */

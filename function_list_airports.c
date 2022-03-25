@@ -23,7 +23,7 @@ int get_numFlights(char id[])
 {
     int i;
     for (i = 0; i < numFlights; i++)
-        if (strcmp(flights[i].airport_departure.id, id) == 0)
+        if (strcmp(flights[i].id, id) == 0)
             break;
 
     return i;
