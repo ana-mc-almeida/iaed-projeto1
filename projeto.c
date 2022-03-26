@@ -14,6 +14,8 @@
 #include "function_list_airports.c"
 #include "function_add_or_list_flights.c"
 #include "function_increase_date.c"
+#include "function_list__departure_flights.c"
+#include "function_list_arrival_flights.c"
 
 int main()
 {
@@ -50,7 +52,7 @@ int main()
 
         /* lista os voos com partida de um aeroporto */
         case 'p':
-            /* code */
+            list_departure_flights();
             break;
 
         /* lista os voos com chegada a um aeroporto */

@@ -16,4 +16,6 @@
 #include "global_structs.c"
 #include "global_variables.c"
 
+#include "general_gets.c"
+
 #endif

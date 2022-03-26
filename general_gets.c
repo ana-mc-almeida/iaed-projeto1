@@ -141,16 +141,55 @@ Time get_time()
     return time;
 }
 
+/* Converte uma data para um inteiro AAAAMMDD */
+int date_to_int(Date date)
+{
+    return date.year * 10000 + date.month * 100 + date.day;
+}
+
+/* Converte uma hora para um inteiro HHMM */
+int time_to_int(Time time)
+{
+    return time.hour * 100 + time.minute;
+}
+
 int check_invalid_date(Date new_date)
 {
     int flag = 1, n_date, c_date;
 
-    c_date = current_date.year * 10000 + current_date.month * 100 + current_date.day;
-    n_date = new_date.year * 10000 + new_date.month * 100 + new_date.day;
+    c_date = date_to_int(current_date);
+    n_date = date_to_int(new_date);
     if (n_date < c_date || n_date - c_date > 10000)
         flag = 0;
 
     return flag;
+}
+
+/* retorna True caso as datas dadas sejam iguais */
+int same_dates(Date d1, Date d2)
+{
+    if (d1.day == d2.day && d1.month == d2.month && d1.year == d2.year)
+        return 1;
+    return 0;
+}
+
+/* imprimir voo formato pedido */
+/* <códigoVoo> <IDAeroportoPartida> <IDAeroportoChegada> <dataPartida> <horaPartida> */
+void print_flight(Flight flight)
+{
+    char id_flight[LEN_ID_FLIGHT];
+    char id_departure[LEN_ID_AIRPORT];
+    char id_arrival[LEN_ID_AIRPORT];
+
+    strcpy(id_flight, flight.id);
+    strcpy(id_arrival, flight.airport_arrival);
+    strcpy(id_departure, flight.airport_departure);
+
+    printf("%s %s %s ", id_flight, id_departure, id_arrival);
+    print_date(flight.date_departure);
+    putchar(' ');
+    print_time(flight.time_departure);
+    putchar('\n');
 }
 
 /*
