@@ -19,4 +19,6 @@ Date current_date = {DIA_INICIAL, MES_INICIAL, ANO_INICIAL};
 
 char current_char = ' ';
 
+int days_of_month[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
 #endif

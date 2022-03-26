@@ -57,7 +57,7 @@ int main()
 
         /* lista os voos com chegada a um aeroporto */
         case 'c':
-            /* code */
+            list_arrival_flights();
             break;
 
         /* avanca a data do sistema */
