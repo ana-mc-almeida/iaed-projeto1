@@ -12,7 +12,7 @@ int find_airport_index(char id[])
     int i;
 
     for (i = 0; i < numAirports; i++)
-        if (strcmp(airports[i].id, id) == 0)
+        if (strcmp(currente_airports[i].id, id) == 0)
             break;
 
     return i;
@@ -23,7 +23,7 @@ int get_numFlights(char id[])
 {
     int i, count = 0;
     for (i = 0; i < numFlights; i++)
-        if (strcmp(flights[i].id, id) == 0)
+        if (strcmp(currente_flights[i].id, id) == 0)
             count++;
 
     return count;
@@ -60,7 +60,7 @@ void print_airport(int i, char id[])
 {
     int flights;
     flights = get_numFlights(id);
-    printf("%s %s %s %d\n", airports[i].id, airports[i].city, airports[i].country, flights);
+    printf("%s %s %s %d\n", currente_airports[i].id, currente_airports[i].city, currente_airports[i].country, flights);
 }
 
 void list_airports()
@@ -96,7 +96,7 @@ void list_airports()
     {
         for (i = 0; i < numAirports; i++)
         {
-            strcpy(ids[i], airports[i].id);
+            strcpy(ids[i], currente_airports[i].id);
         }
 
         sort_ids(ids);

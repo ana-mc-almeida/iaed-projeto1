@@ -15,7 +15,7 @@ void print_airports()
     for (i = 0; i < numAirports; i++)
     {
         Airport a;
-        a = airports[i];
+        a = currente_airports[i];
         printf("%s - %s - %s\n", a.id, a.country, a.city);
     }
     printf("\n**************************\n");

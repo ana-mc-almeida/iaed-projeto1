@@ -24,7 +24,7 @@ int check_duplicate_airport(char s[])
     int flag = 1, i;
     for (i = 0; i < numAirports; i++)
     {
-        if (strcmp(airports[i].id, s) == 0)
+        if (strcmp(currente_airports[i].id, s) == 0)
         {
             flag = 0;
             break;
@@ -59,7 +59,7 @@ void add_airport()
         strcpy(airport.id, id);
         get_word(airport.country);
         get_city(airport.city);
-        airports[numAirports] = airport;
+        currente_airports[numAirports] = airport;
         numAirports++;
 
         printf("airport %s\n", airport.id);

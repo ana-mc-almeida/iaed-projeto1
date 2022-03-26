@@ -30,7 +30,7 @@ void list_flights()
     Flight flight;
     for (i = 0; i < numFlights; i++)
     {
-        flight = flights[i];
+        flight = currente_flights[i];
         print_flight(flight);
     }
 }
@@ -69,21 +69,13 @@ int check_invalid_flightID(char s[])
     return flag;
 }
 
-int same_dates(Date d1, Date d2)
-{
-    int flag = 0;
-    if (d1.day == d2.day && d1.month == d2.month && d1.year == d2.year)
-        flag = 1;
-    return flag;
-}
-
 int check_duplicate_flight(Flight flight)
 {
     int flag = 1, i;
     for (i = 0; i < numFlights; i++)
     {
-        if (strcmp(flights[i].id, flight.id) == 0 &&
-            same_dates(flights[i].date_departure, flight.date_departure))
+        if (strcmp(currente_flights[i].id, flight.id) == 0 &&
+            same_dates(currente_flights[i].date_departure, flight.date_departure))
         {
             flag = 0;
             break;
@@ -178,7 +170,7 @@ void add_list_flights()
 
         if (check_flight(new_flight))
         {
-            flights[numFlights] = new_flight;
+            currente_flights[numFlights] = new_flight;
             numFlights++;
         }
     }

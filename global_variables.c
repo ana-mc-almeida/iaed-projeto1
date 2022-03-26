@@ -9,10 +9,10 @@
 
 #include "headers.c"
 
-Airport airports[MAXAIRPORTS];
+Airport currente_airports[MAXAIRPORTS];
 int numAirports = 0;
 
-Flight flights[MAXFLIGHTS];
+Flight currente_flights[MAXFLIGHTS];
 int numFlights = 0;
 
 Date current_date = {DIA_INICIAL, MES_INICIAL, ANO_INICIAL};
