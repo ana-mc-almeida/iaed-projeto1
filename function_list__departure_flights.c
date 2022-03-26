@@ -19,39 +19,6 @@ int get_departing_flights(char id[], Flight departing_flights[])
 
     return num_flights;
 }
-/*
-void sort_flights(Flight flights[], int size)
-{
-    Flight temp;
-    int i, j, i_date, j_date, i_time, j_time;
-    for (i = 0; i < size; i++)
-    {
-        for (j = 0; j < size - 1 - i; j++)
-        {
-            i_date = date_to_int(flights[j].date_departure);
-            j_date = date_to_int(flights[j + 1].date_departure);
-            if (i_date > j_date)
-            {
-                temp = flights[i];
-                flights[i] = flights[j];
-                flights[j] = temp;
-            }
-            else if (i_date == j_date)
-            {
-                i_time = time_to_int(flights[j].time_departure);
-                j_time = time_to_int(flights[j + 1].time_departure);
-                if (i_time > j_time)
-                {
-                    temp = flights[i];
-                    flights[i] = flights[j];
-                    flights[j] = temp;
-                }
-            }
-        }
-    }
-}
-*/
-
 void list_departure_flights()
 {
     Flight flights[MAXFLIGHTS];
