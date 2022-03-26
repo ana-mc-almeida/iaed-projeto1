@@ -19,20 +19,6 @@ int check_invalid_airportID(char s[])
     return flag;
 }
 
-int check_duplicate_airport(char s[])
-{
-    int flag = 1, i;
-    for (i = 0; i < numAirports; i++)
-    {
-        if (strcmp(currente_airports[i].id, s) == 0)
-        {
-            flag = 0;
-            break;
-        }
-    }
-    return flag;
-}
-
 void add_airport()
 {
     char id[LEN_ID_AIRPORT];

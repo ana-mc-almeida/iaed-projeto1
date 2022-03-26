@@ -6,9 +6,12 @@
 
 #include "headers.c"
 
+/*
 #include "global_helps.c"
-
+*/
+/*
 #include "general_gets.c"
+*/
 
 #include "function_add_airport.c"
 #include "function_list_airports.c"

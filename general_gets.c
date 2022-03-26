@@ -228,4 +228,49 @@ Date get_date()
 }
 */
 
+void sort_flights(Flight flights[], int size)
+{
+    Flight temp;
+    int i, j, present_date, next_date, present_time, next_time;
+    for (i = 0; i < size; i++)
+    {
+        for (j = 0; j < size - 1 - i; j++)
+        {
+            present_date = date_to_int(flights[j].date_departure);
+            next_date = date_to_int(flights[j + 1].date_departure);
+            if (present_date > next_date)
+            {
+                temp = flights[j];
+                flights[j] = flights[j + 1];
+                flights[j + 1] = temp;
+            }
+            else if (present_date == next_date)
+            {
+                present_time = time_to_int(flights[j].time_departure);
+                next_time = time_to_int(flights[j + 1].time_departure);
+                if (present_time > next_time)
+                {
+                    temp = flights[j];
+                    flights[j] = flights[j + 1];
+                    flights[j + 1] = temp;
+                }
+            }
+        }
+    }
+}
+
+int check_duplicate_airport(char s[])
+{
+    int flag = 1, i;
+    for (i = 0; i < numAirports; i++)
+    {
+        if (strcmp(currente_airports[i].id, s) == 0)
+        {
+            flag = 0;
+            break;
+        }
+    }
+    return flag;
+}
+
 #endif

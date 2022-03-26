@@ -15,7 +15,7 @@ int numAirports = 0;
 Flight currente_flights[MAXFLIGHTS];
 int numFlights = 0;
 
-Date current_date = {DIA_INICIAL, MES_INICIAL, ANO_INICIAL};
+Date current_date = {INITIAL_DAY, INITIAL_MONTH, INITIAL_YEAR};
 
 char current_char = ' ';
 

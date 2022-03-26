@@ -21,9 +21,9 @@
 #define LEN_ID_FLIGHT 7
 #define LETRAS_ID 2
 
-#define DIA_INICIAL 1
-#define MES_INICIAL 1
-#define ANO_INICIAL 2022
+#define INITIAL_DAY 1
+#define INITIAL_MONTH 1
+#define INITIAL_YEAR 2022
 
 #define MAX_INT 11
 
