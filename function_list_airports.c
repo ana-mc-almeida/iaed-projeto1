@@ -21,16 +21,16 @@ int find_airport_index(char id[])
 /* obter o numero de voos que saiem do aeroporto com o id dado */
 int get_numFlights(char id[])
 {
-    int i;
+    int i, count = 0;
     for (i = 0; i < numFlights; i++)
         if (strcmp(flights[i].id, id) == 0)
-            break;
+            count++;
 
-    return i;
+    return count;
 }
 
 /* colocar os ids por ordem alfabetica */
-void order_ids(char ids[][LEN_ID_AIRPORT])
+void sort_ids(char ids[][LEN_ID_AIRPORT])
 {
     char temp[LEN_ID_AIRPORT];
     int i, j;
@@ -99,7 +99,7 @@ void list_airports()
             strcpy(ids[i], airports[i].id);
         }
 
-        order_ids(ids);
+        sort_ids(ids);
 
         for (j = 0; j < numAirports; j++)
         {
