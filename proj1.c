@@ -22,9 +22,9 @@
 /* Numero maximo de voos */
 #define MAXFLIGHTS 30000
 /* Numero de caracteres maximo de um pais */
-#define MAXCOUNTRY 30
+#define MAXCOUNTRY 31
 /* Numero de caracteres maximo de um cidade */
-#define MAXCITY 50
+#define MAXCITY 51
 
 #define LEN_ID_AIRPORT 4
 
@@ -322,16 +322,11 @@ void sort_flights(Flight flights[], int size)
 
 int check_duplicate_airport(char s[])
 {
-    int flag = 1, i;
+    int i;
     for (i = 0; i < numAirports; i++)
-    {
         if (strcmp(currente_airports[i].id, s) == 0)
-        {
-            flag = 0;
-            break;
-        }
-    }
-    return flag;
+            return 0;
+    return 1;
 }
 
 /*
@@ -344,16 +339,11 @@ int check_duplicate_airport(char s[])
 
 int check_invalid_airportID(char s[])
 {
-    int flag = 1, i;
+    int i;
     for (i = 0; s[i] != '\0'; i++)
-    {
         if (islower(s[i]))
-        {
-            flag = 0;
-            break;
-        }
-    }
-    return flag;
+            return 0;
+    return 1;
 }
 
 void add_airport()
