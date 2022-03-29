@@ -7,7 +7,7 @@
 #ifndef VARIABLES
 #define VARIABLES
 
-#include "headers.c"
+#include "headers.h"
 
 Airport currente_airports[MAXAIRPORTS];
 int numAirports = 0;

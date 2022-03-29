@@ -6,7 +6,7 @@
 #ifndef HELPS
 #define HELPS
 
-#include "headers.c"
+#include "headers.h"
 
 void print_airports()
 {

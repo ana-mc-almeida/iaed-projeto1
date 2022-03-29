@@ -3,7 +3,7 @@
  * Author:
  * Description:
  */
-#include "headers.c"
+#include "headers.h"
 
 void list_flights()
 {
@@ -56,7 +56,9 @@ int check_duplicate_flight(Flight flight)
     for (i = 0; i < numFlights; i++)
     {
         if (strcmp(currente_flights[i].id, flight.id) == 0 &&
-            same_dates(currente_flights[i].date_departure, flight.date_departure))
+            same_dates(
+                currente_flights[i].date_departure,
+                flight.date_departure))
         {
             flag = 0;
             break;
@@ -90,13 +92,13 @@ int check_flight(Flight flight)
         finish_line();
         flag = 0;
     }
-    else if (check_duplicate_airport(flight.airport_departure))
+    else if (!airport_exists(flight.airport_departure))
     {
         printf("%s: no such airport ID\n", flight.airport_departure);
         finish_line();
         flag = 0;
     }
-    else if (check_duplicate_airport(flight.airport_arrival))
+    else if (!airport_exists(flight.airport_arrival))
     {
         printf("%s: no such airport ID\n", flight.airport_arrival);
         finish_line();

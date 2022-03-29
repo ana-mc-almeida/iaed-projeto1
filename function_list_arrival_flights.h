@@ -4,7 +4,7 @@
  * Description:
  */
 
-#include "headers.c"
+#include "headers.h"
 
 Date next_day(Date date)
 {
@@ -56,7 +56,9 @@ void set_arriving_time(Flight flights[], int num_flights)
     for (i = 0; i < num_flights; i++)
     {
         /* time_departure passa a ser a hora de chegada */
-        flights[i].time_departure = get_arrival_time(flights[i].time_departure, flights[i].duration);
+        flights[i].time_departure = get_arrival_time(
+            flights[i].time_departure,
+            flights[i].duration);
         if (flights[i].time_departure.hour >= 24)
         {
             flights[i].time_departure.hour -= 24;
@@ -73,7 +75,7 @@ void list_arrival_flights()
     int num_flights, i;
 
     get_word(id);
-    if (check_duplicate_airport(id))
+    if (!airport_exists(id))
     {
         printf("%s: no such airport ID\n", id);
         finish_line();

@@ -3,20 +3,16 @@
  * Author:
  * Description: all functions needed to add airport
  */
-#include "headers.c"
 
-int check_invalid_airportID(char s[])
+#include "headers.h"
+
+int is_valid_airportID(char s[])
 {
-    int flag = 1, i;
+    int i;
     for (i = 0; s[i] != '\0'; i++)
-    {
         if (islower(s[i]))
-        {
-            flag = 0;
-            break;
-        }
-    }
-    return flag;
+            return 0;
+    return 1;
 }
 
 void add_airport()
@@ -25,7 +21,7 @@ void add_airport()
     Airport airport;
 
     get_word(id);
-    if (!check_invalid_airportID(id))
+    if (!is_valid_airportID(id))
     {
         printf("invalid airport ID\n");
         finish_line();
@@ -35,7 +31,7 @@ void add_airport()
         printf("too many airports\n");
         finish_line();
     }
-    else if (!check_duplicate_airport(id))
+    else if (!airport_already_exists(id))
     {
         printf("duplicate airport\n");
         finish_line();

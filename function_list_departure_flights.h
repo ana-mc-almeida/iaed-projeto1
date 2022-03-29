@@ -4,7 +4,7 @@
  * Description:
  */
 
-#include "headers.c"
+#include "headers.h"
 
 /* obter o numero de voos que saiem do aeroporto com o id dado */
 int get_departing_flights(char id[], Flight departing_flights[])
@@ -26,7 +26,7 @@ void list_departure_flights()
     int num_flights, i;
 
     get_word(id);
-    if (check_duplicate_airport(id))
+    if (!airport_exists(id))
     {
         printf("%s: no such airport ID\n", id);
         finish_line();

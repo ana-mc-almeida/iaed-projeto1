@@ -4,7 +4,7 @@
  * Description:
  */
 
-#include "headers.c"
+#include "headers.h"
 
 void increase_date()
 {

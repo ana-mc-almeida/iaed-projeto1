@@ -7,7 +7,7 @@
 #ifndef STRUCTS
 #define STRUCTS
 
-#include "headers.c"
+#include "headers.h"
 
 typedef struct
 {

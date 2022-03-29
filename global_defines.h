@@ -12,9 +12,9 @@
 /* Numero maximo de voos */
 #define MAXFLIGHTS 30000
 /* Numero de caracteres maximo de um pais */
-#define MAXCOUNTRY 30
+#define MAXCOUNTRY 31
 /* Numero de caracteres maximo de um cidade */
-#define MAXCITY 50
+#define MAXCITY 51
 
 #define LEN_ID_AIRPORT 4
 

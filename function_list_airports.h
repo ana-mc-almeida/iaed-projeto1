@@ -4,7 +4,7 @@
  * Description:
  */
 
-#include "headers.c"
+#include "headers.h"
 
 /* encontrar o index do aeroporto que tem o id dado */
 int find_airport_index(char id[])
@@ -60,7 +60,11 @@ void print_airport(int i, char id[])
 {
     int flights;
     flights = get_numFlights(id);
-    printf("%s %s %s %d\n", currente_airports[i].id, currente_airports[i].city, currente_airports[i].country, flights);
+    printf("%s %s %s %d\n",
+           currente_airports[i].id,
+           currente_airports[i].city,
+           currente_airports[i].country,
+           flights);
 }
 
 void list_airports()

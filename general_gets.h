@@ -4,94 +4,10 @@
  * Description:
  */
 
-#ifndef HEADER_FILE
-#define HEADER_FILE
+#ifndef GENERAL_FUNCTIONS
+#define GENERAL_FUNCTIONS
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <ctype.h>
-#include <string.h>
-
-/*
- * #include "global_defines.c"
- */
-
-/* Numero maximo de airportos suportados */
-#define MAXAIRPORTS 40
-/* Numero maximo de voos */
-#define MAXFLIGHTS 30000
-/* Numero de caracteres maximo de um pais */
-#define MAXCOUNTRY 30
-/* Numero de caracteres maximo de um cidade */
-#define MAXCITY 50
-
-#define LEN_ID_AIRPORT 4
-
-#define LEN_ID_FLIGHT 7
-#define LETRAS_ID 2
-
-#define INITIAL_DAY 1
-#define INITIAL_MONTH 1
-#define INITIAL_YEAR 2022
-
-#define MAX_INT 11
-
-#define MAX_PASSAGERS 100
-#define MIN_PASSAGERS 10
-
-/*
- * #include "global_structs.c"
- */
-typedef struct
-{
-    int hour;
-    int minute;
-} Time;
-
-typedef struct
-{
-    int day;
-    int month;
-    int year;
-} Date;
-
-typedef struct
-{
-    char id[LEN_ID_AIRPORT];
-    char country[MAXCOUNTRY];
-    char city[MAXCITY];
-} Airport;
-
-typedef struct
-{
-    char id[LEN_ID_FLIGHT];
-    char airport_departure[LEN_ID_AIRPORT];
-    char airport_arrival[LEN_ID_AIRPORT];
-    Date date_departure;
-    Time time_departure;
-    Time duration;
-    int max_passengers;
-} Flight;
-
-/*
- * #include "global_variables.c"
- */
-
-Airport currente_airports[MAXAIRPORTS];
-int numAirports = 0;
-
-Flight currente_flights[MAXFLIGHTS];
-int numFlights = 0;
-
-Date current_date = {INITIAL_DAY, INITIAL_MONTH, INITIAL_YEAR};
-
-char current_char = ' ';
-
-int days_of_month[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-
-/*
-#include "general_gets.c"
-*/
+#include "headers.h"
 
 void remove_spaces()
 {
@@ -276,42 +192,6 @@ void print_flight(Flight flight)
     putchar('\n');
 }
 
-/*
-int string_to_int(char s[])
-{
-    int i, n = 0;
-    printf("%s\n", s);
-    for (i = 0; s[i] != '\0'; i++)
-    {
-        n = n * 10 + s[i] - '0';
-    }
-    printf("%d\n", n);
-    return n;
-}
-*/
-/*
-Date get_date()
-{
-    Date date;
-    char day[3], month[3], year[5];
-    remove_spaces();
-
-    scanf("%c%c-%c%c-%c%c%c%c",
-          &day[0], &day[1],
-          &month[0], &month[1],
-          &year[0], &year[1], &year[2], &year[3]);
-    day[2] = '\0';
-    month[2] = '\0';
-    year[4] = '\0';
-
-    date.day = string_to_int(day);
-    date.month = string_to_int(month);
-    date.year = string_to_int(year);
-
-    return date;
-}
-*/
-
 void sort_flights(Flight flights[], int size)
 {
     Flight temp;
@@ -343,18 +223,13 @@ void sort_flights(Flight flights[], int size)
     }
 }
 
-int check_duplicate_airport(char s[])
+int airport_exists(char s[])
 {
-    int flag = 1, i;
+    int i;
     for (i = 0; i < numAirports; i++)
-    {
         if (strcmp(currente_airports[i].id, s) == 0)
-        {
-            flag = 0;
-            break;
-        }
-    }
-    return flag;
+            return 1;
+    return 0;
 }
 
 #endif
