@@ -25,96 +25,77 @@ int get_passengers()
     return passengers;
 }
 
-int check_invalid_flightID(char s[])
+int isValid_flightId(char s[])
 {
-    int flag = 1, i;
+    int i;
 
     for (i = 0; i < LETRAS_ID; i++)
-    {
         if (islower(s[i]))
-        {
-            flag = 0;
-            break;
-        }
-    }
+            return 0;
 
     for (i = LETRAS_ID; s[i] != '\0'; i++)
-    {
         if (!isdigit(s[i]))
-        {
-            flag = 0;
-            break;
-        }
-    }
+            return 0;
 
-    return flag;
+    return 1;
 }
 
-int check_duplicate_flight(Flight flight)
+int exists_flight(Flight flight)
 {
-    int flag = 1, i;
+    int i;
     for (i = 0; i < numFlights; i++)
-    {
         if (strcmp(currente_flights[i].id, flight.id) == 0 &&
             same_dates(
                 currente_flights[i].date_departure,
                 flight.date_departure))
-        {
-            flag = 0;
-            break;
-        }
-    }
-    return flag;
+            return 1;
+    return 0;
 }
 
-int check_capacity(int passagers)
+int isValid_capacity(int passagers)
 {
-    int flag = 1;
-
     if (passagers < MIN_PASSAGERS || passagers > MAX_PASSAGERS)
-        flag = 0;
-    return flag;
+        return 0;
+    return 1;
 }
 
 int check_flight(Flight flight)
 {
-    int flag = 1;
-
-    if (!check_invalid_flightID(flight.id))
+    if (!isValid_flightId(flight.id))
     {
         printf("invalid flight code\n");
         finish_line();
-        flag = 0;
+        return 0;
     }
-    else if (!check_duplicate_flight(flight))
+    else if (exists_flight(flight))
     {
         printf("flight already exists\n");
         finish_line();
-        flag = 0;
+        return 0;
     }
-    else if (!airport_exists(flight.airport_departure))
+    else if (!exists_airport(flight.airport_departure))
     {
         printf("%s: no such airport ID\n", flight.airport_departure);
         finish_line();
-        flag = 0;
+        return 0;
     }
-    else if (!airport_exists(flight.airport_arrival))
+    else if (!exists_airport(flight.airport_arrival))
     {
         printf("%s: no such airport ID\n", flight.airport_arrival);
         finish_line();
-        flag = 0;
+        return 0;
     }
     else if (numFlights == MAXFLIGHTS)
     {
         printf("too many flights\n");
         finish_line();
-        flag = 0;
+        return 0;
     }
-    else if (!check_invalid_date(flight.date_departure))
+    else if (!isValid_date(flight.date_departure))
     {
         printf("invalid date\n");
         finish_line();
-        flag = 0;
+        return 0;
     }
     else if (
         flight.duration.hour > 12 ||
@@ -123,16 +104,16 @@ int check_flight(Flight flight)
     {
         printf("invalid duration\n");
         finish_line();
-        flag = 0;
+        return 0;
     }
-    else if (!check_capacity(flight.max_passengers))
+    else if (!isValid_capacity(flight.max_passengers))
     {
         printf("invalid capacity\n");
         finish_line();
-        flag = 0;
+        return 0;
     }
 
-    return flag;
+    return 1;
 }
 
 void add_list_flights()

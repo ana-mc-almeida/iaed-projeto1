@@ -14,7 +14,7 @@ void increase_date()
 
     /*print_date(new_date);*/
 
-    if (!check_invalid_date(new_date))
+    if (!isValid_date(new_date))
         printf("invalid date\n");
     else
     {

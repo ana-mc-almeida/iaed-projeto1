@@ -31,7 +31,7 @@ void add_airport()
         printf("too many airports\n");
         finish_line();
     }
-    else if (!airport_already_exists(id))
+    else if (exists_airport(id))
     {
         printf("duplicate airport\n");
         finish_line();

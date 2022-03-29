@@ -30,4 +30,7 @@
 #define MAX_PASSAGERS 100
 #define MIN_PASSAGERS 10
 
+#define ARRIVING 1
+#define DEPARTING 0
+
 #endif

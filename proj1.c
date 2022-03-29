@@ -6,23 +6,25 @@
 
 #include "headers.h"
 
+#include "function_add_airport.h"
+#include "function_list_airports.h"
+#include "function_add_or_list_flights.h"
+#include "function_increase_date.h"
+#include "function_list_departure_flights.h"
+#include "function_list_arrival_flights.h"
+
 int main()
 {
     while (current_char != EOF)
     {
         /* obter carater indicativo da operacao */
         current_char = getchar();
-        /* printf("-- CURRENT CHAR %c\n", current_char);*/
-
-        /* absorver o espaco que vem sempre a seguir */
-        /* getchar(); */
 
         switch (current_char)
         {
         /* termina o programa */
         case 'q':
             return 0;
-            break;
 
         /* adiciona um novo aeroporto ao sistema */
         case 'a':
@@ -53,7 +55,6 @@ int main()
         case 't':
             increase_date();
         }
-        /*printf("-- %c", current_char);*/
     }
 
     return 0;

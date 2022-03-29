@@ -22,6 +22,7 @@ int find_airport_index(char id[])
 int get_numFlights(char id[])
 {
     int i, count = 0;
+
     for (i = 0; i < numFlights; i++)
         if (strcmp(currente_flights[i].id, id) == 0)
             count++;
@@ -36,30 +37,21 @@ void sort_ids(char ids[][LEN_ID_AIRPORT])
     int i, j;
 
     for (i = 0; i < numAirports - 1; i++)
-    {
         for (j = 0; j < numAirports - 1 - i; j++)
-        {
             if (strcmp(ids[j], ids[j + 1]) > 0)
             {
                 strcpy(temp, ids[j]);
                 strcpy(ids[j], ids[j + 1]);
                 strcpy(ids[j + 1], temp);
             }
-        }
-    }
-
-    /* apagar depois
-    for (i = 0; i < numAirports; i++)
-    {
-        printf("%s\n", ids[i]);
-    }
-    */
 }
 
 void print_airport(int i, char id[])
 {
     int flights;
+
     flights = get_numFlights(id);
+
     printf("%s %s %s %d\n",
            currente_airports[i].id,
            currente_airports[i].city,
@@ -69,39 +61,39 @@ void print_airport(int i, char id[])
 
 void list_airports()
 {
-    char id[LEN_ID_AIRPORT], ids[MAXAIRPORTS][LEN_ID_AIRPORT];
-    int i, j, flag = 1;
-
-    /* print_airports(); */
-    /*while (current_char != '\n')
-    {*/
+    char id[LEN_ID_AIRPORT];
+    int i, j;
+    /* array onde seram guardados e ordenados os ids dos aeroportos */
+    char ids[MAXAIRPORTS][LEN_ID_AIRPORT];
+    /* flag que indica se ha mais ids por ler */
+    int last_id = 0;
 
     current_char = getchar();
-    /* printf("CURRENT CHAR - %c", current_char); */
+
     if (current_char != '\n') /* significa que tem pelo menos um id */
     {
         get_word(id);
-        while (flag)
+
+        while (!last_id)
         {
             if (current_char == '\n')
-                flag = 0;
+                last_id = 1;
+
             i = find_airport_index(id);
+
             if (i == numAirports)
                 printf("%s: no such airport ID\n", id);
             else
-            {
                 print_airport(i, id);
-            }
-            if (flag)
+
+            if (!last_id)
                 get_word(id);
         }
     }
     else
     {
         for (i = 0; i < numAirports; i++)
-        {
             strcpy(ids[i], currente_airports[i].id);
-        }
 
         sort_ids(ids);
 
