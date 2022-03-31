@@ -227,27 +227,28 @@ int exists_airport(char s[])
 }
 
 /* obter o numero de voos que saiem/chegam do/ao aeroporto com o id dado */
-/*
+
 int get_flights(char id[], Flight flights[], int state)
 {
     int i, count_flights = 0;
 
     char airport_id[LEN_ID_AIRPORT];
 
-    if (state == ARRIVING)
-        strcpy(airport_id, currente_flights[i].airport_arrival);
-    else
-        strcpy(airport_id, currente_flights[i].airport_departure);
-
     for (i = 0; i < numFlights; i++)
+    {
+        if (state == ARRIVING)
+            strcpy(airport_id, currente_flights[i].airport_arrival);
+        else
+            strcpy(airport_id, currente_flights[i].airport_departure);
+
         if (strcmp(airport_id, id) == 0)
         {
             flights[count_flights] = currente_flights[i];
             count_flights++;
         }
+    }
 
     return count_flights;
 }
-*/
 
 #endif

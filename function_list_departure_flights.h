@@ -6,21 +6,6 @@
 
 #include "headers.h"
 
-/* obter o numero de voos que saiem do aeroporto com o id dado */
-int get_departing_flights(char id[], Flight departing_flights[])
-{
-    int i, count_flights = 0;
-
-    for (i = 0; i < numFlights; i++)
-        if (strcmp(currente_flights[i].airport_departure, id) == 0)
-        {
-            departing_flights[count_flights] = currente_flights[i];
-            count_flights++;
-        }
-
-    return count_flights;
-}
-
 void list_departure_flights()
 {
     Flight flights[MAXFLIGHTS];
@@ -35,7 +20,7 @@ void list_departure_flights()
     }
     else
     {
-        num_flights = get_departing_flights(id, flights);
+        num_flights = get_flights(id, flights, DEPARTING);
         sort_flights(flights, num_flights, DEPARTING);
 
         for (i = 0; i < num_flights; i++)

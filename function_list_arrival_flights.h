@@ -42,20 +42,6 @@ Time get_arrival_time(Time departure, Time duration)
     return arrival;
 }
 
-int get_arriving_flights(char id[], Flight arriving_flights[])
-{
-    int i, count_flights = 0;
-
-    for (i = 0; i < numFlights; i++)
-        if (strcmp(currente_flights[i].airport_arrival, id) == 0)
-        {
-            arriving_flights[count_flights] = currente_flights[i];
-            count_flights++;
-        }
-
-    return count_flights;
-}
-
 void set_arriving_time(Flight flights[], int num_flights)
 {
     int i;
@@ -92,7 +78,7 @@ void list_arrival_flights()
     }
     else
     {
-        num_flights = get_arriving_flights(id, flights);
+        num_flights = get_flights(id, flights, ARRIVING);
         set_arriving_time(flights, num_flights);
         sort_flights(flights, num_flights, ARRIVING);
 
