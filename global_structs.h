@@ -38,6 +38,8 @@ typedef struct
     Time time_departure;
     Time duration;
     int max_passengers;
+    Date date_arrival;
+    Time time_arrival;
 } Flight;
 
 #endif

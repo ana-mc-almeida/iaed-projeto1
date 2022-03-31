@@ -168,7 +168,7 @@ void print_flight(Flight flight)
     putchar('\n');
 }
 
-void sort_flights(Flight flights[], int size)
+void sort_flights(Flight flights[], int size, int state)
 {
     Flight temp;
     int i, j, present_date, next_date, present_time, next_time;
@@ -176,8 +176,16 @@ void sort_flights(Flight flights[], int size)
     for (i = 0; i < size; i++)
         for (j = 0; j < size - 1 - i; j++)
         {
-            present_date = date_to_int(flights[j].date_departure);
-            next_date = date_to_int(flights[j + 1].date_departure);
+            if (state == ARRIVING)
+            {
+                present_date = date_to_int(flights[j].date_arrival);
+                next_date = date_to_int(flights[j + 1].date_arrival);
+            }
+            else
+            {
+                present_date = date_to_int(flights[j].date_departure);
+                next_date = date_to_int(flights[j + 1].date_departure);
+            }
 
             if (present_date > next_date)
             {
@@ -187,8 +195,16 @@ void sort_flights(Flight flights[], int size)
             }
             else if (present_date == next_date)
             {
-                present_time = time_to_int(flights[j].time_departure);
-                next_time = time_to_int(flights[j + 1].time_departure);
+                if (state == ARRIVING)
+                {
+                    present_time = time_to_int(flights[j].time_arrival);
+                    next_time = time_to_int(flights[j + 1].time_arrival);
+                }
+                else
+                {
+                    present_time = time_to_int(flights[j].time_departure);
+                    next_time = time_to_int(flights[j + 1].time_departure);
+                }
 
                 if (present_time > next_time)
                 {

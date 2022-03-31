@@ -62,17 +62,17 @@ void set_arriving_time(Flight flights[], int num_flights)
 
     for (i = 0; i < num_flights; i++)
     {
-        /* time_departure passa a ser a hora de chegada */
-        flights[i].time_departure = get_arrival_time(
+        flights[i].date_arrival = flights[i].date_departure;
+
+        flights[i].time_arrival = get_arrival_time(
             flights[i].time_departure,
             flights[i].duration);
 
         /* muda a hora */
-        if (flights[i].time_departure.hour >= 24)
+        if (flights[i].time_arrival.hour >= 24)
         {
-            flights[i].time_departure.hour -= 24;
-            /* date_departure passa a ser a hora de chegada */
-            flights[i].date_departure = next_day(flights[i].date_departure);
+            flights[i].time_arrival.hour -= 24;
+            flights[i].date_arrival = next_day(flights[i].date_arrival);
         }
     }
 }
@@ -94,14 +94,14 @@ void list_arrival_flights()
     {
         num_flights = get_arriving_flights(id, flights);
         set_arriving_time(flights, num_flights);
-        sort_flights(flights, num_flights);
+        sort_flights(flights, num_flights, ARRIVING);
 
         for (i = 0; i < num_flights; i++)
         {
             printf("%s %s ", flights[i].id, flights[i].airport_departure);
-            print_date(flights[i].date_departure);
+            print_date(flights[i].date_arrival);
             putchar(' ');
-            print_time(flights[i].time_departure);
+            print_time(flights[i].time_arrival);
             putchar('\n');
         }
     }

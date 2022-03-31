@@ -36,7 +36,7 @@ void list_departure_flights()
     else
     {
         num_flights = get_departing_flights(id, flights);
-        sort_flights(flights, num_flights);
+        sort_flights(flights, num_flights, DEPARTING);
 
         for (i = 0; i < num_flights; i++)
         {
