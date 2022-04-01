@@ -3,6 +3,7 @@
         "ctype.h": "c",
         "function_list_airports.h": "c",
         "global_variables.h": "c",
-        "global_defines.h": "c"
+        "global_defines.h": "c",
+        "headers.h": "c"
     }
 }

@@ -1,7 +1,7 @@
 /*
- * File:
- * Author:
- * Description:
+ * File: headers.h
+ * Author: Ana Margarida Almeida - 102618
+ * Description: include das bibliotecas e dos ficheiros necessarios
  */
 
 #ifndef HEADER_FILE
@@ -15,7 +15,5 @@
 #include "global_defines.h"
 #include "global_structs.h"
 #include "global_variables.h"
-
-#include "general_gets.h"
 
 #endif

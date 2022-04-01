@@ -1,7 +1,7 @@
 /*
- * File:
- * Author:
- * Description:
+ * File: global_structs.c
+ * Author: Ana Margarida Almeida - 102618
+ * Description: criacao das estruturas necessarias
  */
 
 #ifndef STRUCTS
