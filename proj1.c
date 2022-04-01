@@ -6,8 +6,6 @@
 
 #include "headers.h"
 
-/* ---------- #include "general_gets.h" ---------- */
-
 /* le todos os espacos em branco */
 void remove_spaces()
 {
@@ -154,51 +152,97 @@ void print_flight(Flight flight)
     putchar('\n');
 }
 
+/* imprimir voos de partida ou chegada */
+void print_flights(Flight flights[], int num_flights, int state)
+{
+    int i;
+    char airport[LEN_ID_AIRPORT];
+    Date date;
+    Time time;
+
+    for (i = 0; i < num_flights; i++)
+    {
+        if (state == ARRIVING)
+        {
+            strcpy(airport, flights[i].airport_departure);
+            date = flights[i].date_arrival;
+            time = flights[i].time_arrival;
+        }
+        else
+        {
+            strcpy(airport, flights[i].airport_arrival);
+            date = flights[i].date_departure;
+            time = flights[i].time_departure;
+        }
+
+        printf("%s %s ", flights[i].id, airport);
+        print_date(date);
+        putchar(' ');
+        print_time(time);
+        putchar('\n');
+    }
+}
+
+/* retorna o dia do voo do indice dado */
+int get_present_date(Flight flights[], int state, int index)
+{
+    if (state == ARRIVING)
+        return date_to_int(flights[index].date_arrival);
+    else
+        return date_to_int(flights[index].date_departure);
+}
+
+/* retorna o dia do voo do indice a seguir ao dado */
+int get_next_date(Flight flights[], int state, int index)
+{
+    if (state == ARRIVING)
+        return date_to_int(flights[index + 1].date_arrival);
+    else
+        return date_to_int(flights[index + 1].date_departure);
+    ;
+}
+
+/* retorna a hora do voo do indice dado */
+int get_present_time(Flight flights[], int state, int index)
+{
+    if (state == ARRIVING)
+        return time_to_int(flights[index].time_arrival);
+    else
+        return time_to_int(flights[index].time_departure);
+    ;
+}
+
+/* retorna a hora do voo do indice a seguir ao dado */
+int get_next_time(Flight flights[], int state, int index)
+{
+    if (state == ARRIVING)
+        return time_to_int(flights[index + 1].time_arrival);
+    else
+        return time_to_int(flights[index + 1].time_departure);
+    ;
+}
+
 /* ordena os voos pela ordem de partida ou chegada */
 void sort_flights(Flight flights[], int size, int state)
 {
-    Flight temp;
     int i, j, present_date, next_date, present_time, next_time;
 
     for (i = 0; i < size; i++)
         for (j = 0; j < size - 1 - i; j++)
         {
-            if (state == ARRIVING)
-            {
-                present_date = date_to_int(flights[j].date_arrival);
-                next_date = date_to_int(flights[j + 1].date_arrival);
-            }
-            else
-            {
-                present_date = date_to_int(flights[j].date_departure);
-                next_date = date_to_int(flights[j + 1].date_departure);
-            }
+            present_date = get_present_date(flights, state, j);
+            next_date = get_next_date(flights, state, j);
 
             if (present_date > next_date)
-            {
-                temp = flights[j];
-                flights[j] = flights[j + 1];
-                flights[j + 1] = temp;
-            }
+                SWAP_FLIGHTS(flights[j], flights[j + 1])
+
             else if (present_date == next_date)
             {
-                if (state == ARRIVING)
-                {
-                    present_time = time_to_int(flights[j].time_arrival);
-                    next_time = time_to_int(flights[j + 1].time_arrival);
-                }
-                else
-                {
-                    present_time = time_to_int(flights[j].time_departure);
-                    next_time = time_to_int(flights[j + 1].time_departure);
-                }
+                present_time = get_present_time(flights, state, j);
+                next_time = get_next_time(flights, state, j);
 
                 if (present_time > next_time)
-                {
-                    temp = flights[j];
-                    flights[j] = flights[j + 1];
-                    flights[j + 1] = temp;
-                }
+                    SWAP_FLIGHTS(flights[j], flights[j + 1])
             }
         }
 }
@@ -237,8 +281,6 @@ int get_flights(char id[], Flight flights[], int state)
     return count_flights;
 }
 
-/* --------- #include "function_add_airport.h" ----------*/
-
 /* obtem o nome da cidade */
 void get_city(char s[])
 {
@@ -265,6 +307,30 @@ int is_valid_airportID(char s[])
     return 1;
 }
 
+/* verifica se se pode adicionar o aeroporto */
+int check_airport(char id[])
+{
+    if (!is_valid_airportID(id))
+    {
+        printf("invalid airport ID\n");
+        finish_line();
+        return 0;
+    }
+    else if (numAirports == MAXAIRPORTS)
+    {
+        printf("too many airports\n");
+        finish_line();
+        return 0;
+    }
+    else if (exists_airport(id))
+    {
+        printf("duplicate airport\n");
+        finish_line();
+        return 0;
+    }
+    return 1;
+}
+
 /* adiciona um novo aeroporto ao sistema */
 void add_airport()
 {
@@ -273,22 +339,7 @@ void add_airport()
 
     get_word(id);
 
-    if (!is_valid_airportID(id))
-    {
-        printf("invalid airport ID\n");
-        finish_line();
-    }
-    else if (numAirports == MAXAIRPORTS)
-    {
-        printf("too many airports\n");
-        finish_line();
-    }
-    else if (exists_airport(id))
-    {
-        printf("duplicate airport\n");
-        finish_line();
-    }
-    else
+    if (check_airport(id))
     {
         strcpy(airport.id, id);
 
@@ -301,8 +352,6 @@ void add_airport()
         printf("airport %s\n", airport.id);
     }
 }
-
-/* ---------- #include "function_list_airports.h" --------- */
 
 /* encontrar o index do aeroporto que tem o id dado */
 int find_airport_index(char id[])
@@ -358,54 +407,63 @@ void print_airport(int i, char id[])
            flights);
 }
 
-/* lista os aeroportos */
-void list_airports()
+/* listar todos os aeroportos registados */
+void list_all_airports()
 {
-    char id[LEN_ID_AIRPORT];
     int i, j;
+    char id[LEN_ID_AIRPORT];
     /* array onde seram guardados e ordenados os ids dos aeroportos */
     char ids[MAXAIRPORTS][LEN_ID_AIRPORT];
-    /* flag que indica se ha mais ids por ler */
-    int last_id = 0;
 
-    current_char = getchar();
+    for (i = 0; i < numAirports; i++)
+        strcpy(ids[i], currente_airports[i].id);
 
-    if (current_char != '\n') /* significa que tem pelo menos um id */
+    sort_ids(ids);
+
+    for (j = 0; j < numAirports; j++)
     {
-        get_word(id);
-
-        while (!last_id)
-        {
-            if (current_char == '\n')
-                last_id = 1;
-
-            i = find_airport_index(id);
-
-            if (i == numAirports)
-                printf("%s: no such airport ID\n", id);
-            else
-                print_airport(i, id);
-
-            if (!last_id)
-                get_word(id);
-        }
-    }
-    else
-    {
-        for (i = 0; i < numAirports; i++)
-            strcpy(ids[i], currente_airports[i].id);
-
-        sort_ids(ids);
-
-        for (j = 0; j < numAirports; j++)
-        {
-            i = find_airport_index(ids[j]);
-            print_airport(i, id);
-        }
+        i = find_airport_index(ids[j]);
+        print_airport(i, id);
     }
 }
 
-/* --------- #include "function_add_or_list_flights.h" --------- */
+/* listar apenas os aeroportos pedidos */
+void list_given_airports()
+{
+    int index;
+    char id[LEN_ID_AIRPORT];
+    /* flag que indica se ha mais ids por ler */
+    int last_id = 0;
+
+    get_word(id);
+
+    while (!last_id)
+    {
+        if (current_char == '\n')
+            last_id = 1;
+
+        index = find_airport_index(id);
+
+        if (index == numAirports)
+            printf("%s: no such airport ID\n", id);
+        else
+            print_airport(index, id);
+
+        if (!last_id)
+            get_word(id);
+    }
+}
+
+/* lista os aeroportos */
+void list_airports()
+{
+    current_char = getchar();
+
+    if (current_char != '\n') /* significa que tem pelo menos um id */
+        list_given_airports();
+    else
+        list_all_airports();
+}
 
 /* printa todos os voos */
 void list_flights()
@@ -555,14 +613,12 @@ void add_list_flights()
     }
 }
 
-/* --------- #include "function_list_departure_flights.h" -------- */
-
 /* lista os voos com partida de um aeroporto */
 void list_departure_flights()
 {
     Flight flights[MAXFLIGHTS];
     char id[LEN_ID_AIRPORT];
-    int num_flights, i;
+    int num_flights;
 
     get_word(id);
     if (!exists_airport(id))
@@ -574,19 +630,9 @@ void list_departure_flights()
     {
         num_flights = get_flights(id, flights, DEPARTING);
         sort_flights(flights, num_flights, DEPARTING);
-
-        for (i = 0; i < num_flights; i++)
-        {
-            printf("%s %s ", flights[i].id, flights[i].airport_arrival);
-            print_date(flights[i].date_departure);
-            putchar(' ');
-            print_time(flights[i].time_departure);
-            putchar('\n');
-        }
+        print_flights(flights, num_flights, DEPARTING);
     }
 }
-
-/* --------- #include "function_list_arrival_flights.h" --------- */
 
 /* retorna o dia a seguir ao dia dado */
 Date next_day(Date date)
@@ -653,7 +699,7 @@ void list_arrival_flights()
 {
     Flight flights[MAXFLIGHTS];
     char id[LEN_ID_AIRPORT];
-    int num_flights, i;
+    int num_flights;
 
     get_word(id);
 
@@ -667,19 +713,9 @@ void list_arrival_flights()
         num_flights = get_flights(id, flights, ARRIVING);
         set_arriving_time(flights, num_flights);
         sort_flights(flights, num_flights, ARRIVING);
-
-        for (i = 0; i < num_flights; i++)
-        {
-            printf("%s %s ", flights[i].id, flights[i].airport_departure);
-            print_date(flights[i].date_arrival);
-            putchar(' ');
-            print_time(flights[i].time_arrival);
-            putchar('\n');
-        }
+        print_flights(flights, num_flights, ARRIVING);
     }
 }
-
-/* ---------- #include "function_increase_date.h" --------- */
 
 /* avanca a data do sistema */
 void increase_date()
@@ -698,45 +734,32 @@ void increase_date()
     }
 }
 
+/* executa as funcoes de cada letra */
 int main()
 {
     while (current_char != EOF)
     {
-        /* obter carater indicativo da operacao */
         current_char = getchar();
 
         switch (current_char)
         {
-        /* termina o programa */
         case 'q':
             return 0;
-
-        /* adiciona um novo aeroporto ao sistema */
         case 'a':
             add_airport();
             break;
-
-        /* lista os aeroportos */
         case 'l':
             list_airports();
             break;
-
-        /* adiciona um novo voo ou lista todos os voos */
         case 'v':
             add_list_flights();
             break;
-
-        /* lista os voos com partida de um aeroporto */
         case 'p':
             list_departure_flights();
             break;
-
-        /* lista os voos com chegada a um aeroporto */
         case 'c':
             list_arrival_flights();
             break;
-
-        /* avanca a data do sistema */
         case 't':
             increase_date();
         }

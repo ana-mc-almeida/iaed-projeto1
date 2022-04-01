@@ -41,4 +41,13 @@
 #define ARRIVING 1
 #define DEPARTING 0
 
+/* macro-funcao que troca voos */
+#define SWAP_FLIGHTS(a, b) \
+    {                      \
+        Flight temp;       \
+        temp = a;          \
+        a = b;             \
+        b = temp;          \
+    }
+
 #endif
