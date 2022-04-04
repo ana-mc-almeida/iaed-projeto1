@@ -26,6 +26,8 @@
 #define MAX_PASSAGERS 100
 /* Numero minimo de passageiros */
 #define MIN_PASSAGERS 10
+/* Numero maximo de duracao */
+#define MAX_DURATION_HOUR 12
 
 /* Dia em que a data do sistema e inicializada */
 #define INITIAL_DAY 1

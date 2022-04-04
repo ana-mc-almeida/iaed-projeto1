@@ -1,7 +1,8 @@
 /*
  * File: proj1.c
  * Author: Ana Margarida Almeida
- * Description:
+ * Description: Sistema de gestão de voos comerciais diários entre
+ * aeroportos
  */
 
 #include "headers.h"
@@ -566,8 +567,8 @@ int check_flight(Flight flight)
         return 0;
     }
     else if (
-        flight.duration.hour > 12 ||
-        (flight.duration.hour == 12 &&
+        flight.duration.hour > MAX_DURATION_HOUR ||
+        (flight.duration.hour == MAX_DURATION_HOUR &&
          flight.duration.minute != 0))
     {
         printf("invalid duration\n");
