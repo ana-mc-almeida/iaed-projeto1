@@ -738,10 +738,8 @@ void increase_date()
 /* executa as funcoes de cada letra */
 int main()
 {
-    while (current_char != EOF)
+    while ((current_char = getchar()) != EOF)
     {
-        current_char = getchar();
-
         switch (current_char)
         {
         case 'q':
@@ -763,6 +761,7 @@ int main()
             break;
         case 't':
             increase_date();
+            break;
         }
     }
 
