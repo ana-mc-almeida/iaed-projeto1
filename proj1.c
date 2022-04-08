@@ -527,62 +527,37 @@ int isValid_capacity(int passagers)
     return 1;
 }
 
+int isValid_time(Time time)
+{
+    if (time.hour > MAX_DURATION_HOUR ||
+        (time.hour == MAX_DURATION_HOUR && time.minute != 0))
+        return 0;
+    return 1;
+}
+
 /* verifica se existe algum erro com o voo */
 int check_flight(Flight flight)
 {
     if (!isValid_flightId(flight.id))
-    {
         printf("invalid flight code\n");
-        finish_line();
-        return 0;
-    }
     else if (exists_flight(flight))
-    {
         printf("flight already exists\n");
-        finish_line();
-        return 0;
-    }
     else if (!exists_airport(flight.airport_departure))
-    {
         printf("%s: no such airport ID\n", flight.airport_departure);
-        finish_line();
-        return 0;
-    }
     else if (!exists_airport(flight.airport_arrival))
-    {
         printf("%s: no such airport ID\n", flight.airport_arrival);
-        finish_line();
-        return 0;
-    }
     else if (numFlights == MAXFLIGHTS)
-    {
         printf("too many flights\n");
-        finish_line();
-        return 0;
-    }
     else if (!isValid_date(flight.date_departure))
-    {
         printf("invalid date\n");
-        finish_line();
-        return 0;
-    }
-    else if (
-        flight.duration.hour > MAX_DURATION_HOUR ||
-        (flight.duration.hour == MAX_DURATION_HOUR &&
-         flight.duration.minute != 0))
-    {
+    else if (!isValid_time(flight.duration))
         printf("invalid duration\n");
-        finish_line();
-        return 0;
-    }
     else if (!isValid_capacity(flight.max_passengers))
-    {
         printf("invalid capacity\n");
-        finish_line();
-        return 0;
-    }
+    else
+        return 1;
 
-    return 1;
+    return 0;
 }
 
 /* adiciona um novo voo ou lista todos os voos */
@@ -590,9 +565,7 @@ void add_list_flights()
 {
     Flight new_flight;
 
-    current_char = getchar();
-
-    if (current_char != '\n') /* adicionar voo */
+    if ((current_char = getchar()) != '\n') /* adicionar voo */
     {
         get_word(new_flight.id);
         get_word(new_flight.airport_departure);
@@ -607,11 +580,11 @@ void add_list_flights()
             currente_flights[numFlights] = new_flight;
             numFlights++;
         }
+        else
+            finish_line();
     }
     else /* listar voos */
-    {
         list_flights();
-    }
 }
 
 /* lista os voos com partida de um aeroporto */
